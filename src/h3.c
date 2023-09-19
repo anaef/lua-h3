@@ -311,7 +311,7 @@ static int h3_griddisk (lua_State *L) {
 	mode = luaL_optstring(L, 3, "");
 	check(L, maxGridDiskSize(k, &num));
 	if (strchr(mode, 'd')) {
-		if (num <= LUAH3_STACK_MAX) {
+		if (num <= LUAH3_STACK_MAX / 2) {
 			out = alloca(num * sizeof(H3Index));
 			distances = alloca(num * sizeof(int));
 		} else {
@@ -491,7 +491,7 @@ static int h3_compactcells (lua_State *L) {
 
 	luaL_checktype(L, 1, LUA_TTABLE);
 	len = lua_rawlen(L, 1);
-	if (len <= LUAH3_STACK_MAX) {
+	if (len <= LUAH3_STACK_MAX / 2) {
 		cellSet = alloca(len * sizeof(H3Index));
 		compactedSet = alloca(len * sizeof(H3Index));
 	} else {
@@ -527,7 +527,7 @@ static int h3_uncompactcells (lua_State *L) {
 	luaL_checktype(L, 1, LUA_TTABLE);
 	res = luaL_checkinteger(L, 2);
 	len = lua_rawlen(L, 1);
-	if (len <= LUAH3_STACK_MAX) {
+	if (len <= LUAH3_STACK_MAX / 2) {
 		compactedSet = alloca(len * sizeof(H3Index));
 	} else {
 		compactedSet = lua_newuserdata(L, len * sizeof(H3Index));
@@ -540,7 +540,7 @@ static int h3_uncompactcells (lua_State *L) {
 		lua_pop(L, 1);
 	}
 	check(L, uncompactCellsSize(compactedSet, len, res, &num));
-	if (num <= LUAH3_STACK_MAX) {
+	if (num <= LUAH3_STACK_MAX / 2) {
 		cellSet = alloca(num * sizeof(H3Index));
 	} else {
 		cellSet = lua_newuserdata(L, num * sizeof(H3Index));
