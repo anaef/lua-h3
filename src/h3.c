@@ -131,7 +131,7 @@ static int geopolygon_gc (lua_State *L) {
 	int          i;
 	GeoPolygon  *polygon;
 
-	polygon = luaL_checkudata(L, 1, LUAH3_GEOPOLYGON_METATABLE);
+	polygon = luaL_checkudata(L, 1, LUAH3_GEOPOLYGON);
 	free(polygon->geoloop.verts);
 	for (i = 0; i < polygon->numHoles; i++) {
 		free(polygon->holes[i].verts);
@@ -143,7 +143,7 @@ static int geopolygon_gc (lua_State *L) {
 static int linkedgeopolygon_gc (lua_State *L) {
 	LinkedGeoPolygon  *polygon;
 
-	polygon = luaL_checkudata(L, 1, LUAH3_LINKEDGEOPOLYGON_METATABLE);
+	polygon = luaL_checkudata(L, 1, LUAH3_LINKEDGEOPOLYGON);
 	destroyLinkedMultiPolygon(polygon);
 	return 0;
 }
@@ -601,7 +601,7 @@ static int h3_polygontocells (lua_State *L) {
 	res = luaL_checkinteger(L, 2);
 	polygon = lua_newuserdata(L, sizeof(GeoPolygon));
 	memset(polygon, 0, sizeof(GeoPolygon));
-	luaL_getmetatable(L, LUAH3_GEOPOLYGON_METATABLE);
+	luaL_getmetatable(L, LUAH3_GEOPOLYGON);
 	lua_setmetatable(L, -2);
 	geoloop(L, 1, 1, &polygon->geoloop);
 	if (len > 1) {
@@ -663,7 +663,7 @@ static int h3_cellstopolygons (lua_State *L) {
 	}
 	polygon = lua_newuserdata(L, sizeof(LinkedGeoPolygon));
 	memset(polygon, 0, sizeof(LinkedGeoPolygon));
-	luaL_getmetatable(L, LUAH3_LINKEDGEOPOLYGON_METATABLE);
+	luaL_getmetatable(L, LUAH3_LINKEDGEOPOLYGON);
 	lua_setmetatable(L, -2);
 	check(L, cellsToLinkedMultiPolygon(h3Set, len, polygon));
 	lua_newtable(L);
@@ -1098,11 +1098,11 @@ int luaopen_h3 (lua_State *L) {
 	luaL_newlib(L, FUNCTIONS);
 
 	/* metatables */
-	luaL_newmetatable(L, LUAH3_GEOPOLYGON_METATABLE);
+	luaL_newmetatable(L, LUAH3_GEOPOLYGON);
 	lua_pushcfunction(L, geopolygon_gc);
 	lua_setfield(L, -2, "__gc");
 	lua_pop(L, 1);
-	luaL_newmetatable(L, LUAH3_LINKEDGEOPOLYGON_METATABLE);
+	luaL_newmetatable(L, LUAH3_LINKEDGEOPOLYGON);
 	lua_pushcfunction(L, linkedgeopolygon_gc);
 	lua_setfield(L, -2, "__gc");
 	lua_pop(L, 1);

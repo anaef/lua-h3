@@ -11,9 +11,9 @@
 #include <lua.h>
 
 
-#define LUAH3_GEOPOLYGON_METATABLE        "h3.geopolygon"
-#define LUAH3_LINKEDGEOPOLYGON_METATABLE  "h3.linkedgeopolygon"
-#define LUAH3_STACK_MAX                    128                   /* maximum indexes on stack */
+#define LUAH3_GEOPOLYGON        "h3.geopolygon"        /* GeoPolygon metatable */
+#define LUAH3_LINKEDGEOPOLYGON  "h3.linkedgeopolygon"  /* LinkedGeoPolygon metatable */
+#define LUAH3_STACK_MAX         128                    /* maximum indexes on stack */
 
 
 int luaopen_h3(lua_State *L);
