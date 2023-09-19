@@ -86,31 +86,10 @@ static const char *const H3_ERROR_MESSAGES[] = {
 	"bad option",
 };
 
-static const char *const EDGE_OPTIONS[] = {
-	"both",
-	"origin",
-	"destination",
-	NULL
-};
-
-static const char *const HEXAGON_QUANTITIES[] = {
-	"area",
-	"edge",
-	NULL
-};
-
-static const char *const HEXAGON_UNITS[] = {
-	"m",
-	"km",
-	NULL
-};
-
-static const char *const GEO_UNITS[] = {
-	"m",
-	"km",
-	"rad",
-	NULL
-};
+static const char *const EDGE_OPTIONS[] = { "both", "origin", "destination", NULL };
+static const char *const HEXAGON_QUANTITIES[] = { "area", "edge", NULL };
+static const char *const HEXAGON_UNITS[] = { "m", "km", NULL };
+static const char *const GEO_UNITS[] = { "m", "km", "rad", NULL };
 
 
 /*
@@ -442,30 +421,30 @@ static int h3_localijtocell (lua_State *L) {
  */
 
 static int h3_celltoparent (lua_State *L) {
-	int      parentRes;
+	int      parentres;
 	H3Index  cell, parent;
 
 	cell = luaL_checkinteger(L, 1);
-	parentRes = luaL_checkinteger(L, 2);
-	check(L, cellToParent(cell, parentRes, &parent));
+	parentres = luaL_checkinteger(L, 2);
+	check(L, cellToParent(cell, parentres, &parent));
 	lua_pushinteger(L, parent);
 	return 1;
 }
 
 static int h3_celltochildren (lua_State *L) {
-	int      childRes;
+	int      childres;
 	int64_t  num, i;
 	H3Index  cell, *children;
 
 	cell = luaL_checkinteger(L, 1);
-	childRes = luaL_checkinteger(L, 2);
-	check(L, cellToChildrenSize(cell, childRes, &num));
+	childres = luaL_checkinteger(L, 2);
+	check(L, cellToChildrenSize(cell, childres, &num));
 	if (num <= LUAH3_STACK_MAX) {
 		children = alloca(num * sizeof(H3Index));
 	} else {
 		children = lua_newuserdata(L, num * sizeof(H3Index));
 	}
-	check(L, cellToChildren(cell, childRes, children));
+	check(L, cellToChildren(cell, childres, children));
 	lua_createtable(L, num, 0);
 	for (i = 0; i < num; i++) {
 		lua_pushinteger(L, children[i]);
@@ -475,12 +454,12 @@ static int h3_celltochildren (lua_State *L) {
 }
 
 static int h3_celltocenterchild (lua_State *L) {
-	int      childRes;
+	int      childres;
 	H3Index  cell, child;
 
 	cell = luaL_checkinteger(L, 1);
-	childRes = luaL_checkinteger(L, 2);
-	check(L, cellToCenterChild(cell, childRes, &child));
+	childres = luaL_checkinteger(L, 2);
+	check(L, cellToCenterChild(cell, childres, &child));
 	lua_pushinteger(L, child);
 	return 1;
 }
@@ -696,7 +675,7 @@ static int h3_cellstopolygons (lua_State *L) {
 
 
 /*
- * directed edges
+ * directed edge
  */
 
 static int h3_areneighborcells (lua_State *L) {
@@ -864,7 +843,7 @@ static int h3_hexagonavg (lua_State *L)  {
 			break;
 
 		default:
-			return 0; /* not reached */
+			return 0;  /* not reached */
 		}
 		break;
 
@@ -959,7 +938,7 @@ static int h3_res0cells (lua_State *L) {
 	int64_t   num, i;
 	H3Index  *out;
 
-	num = res0CellCount();
+	num = res0CellCount();  /* 122 */
 	if (num <= LUAH3_STACK_MAX) {
 		out = alloca(num * sizeof(H3Index));
 	} else {
@@ -980,7 +959,7 @@ static int h3_pentagons (lua_State *L) {
 	H3Index  *out;
 
 	res = luaL_checkinteger(L, 1);
-	num = pentagonCount();
+	num = pentagonCount();  /* 12 */
 	if (num <= LUAH3_STACK_MAX) {
 		out = alloca(num * sizeof(H3Index));
 	} else {
@@ -1069,7 +1048,7 @@ int luaopen_h3 (lua_State *L) {
 		{ "polygontocells", h3_polygontocells },
 		{ "cellstopolygons", h3_cellstopolygons },
 
-		/* directed edges */
+		/* directed edge */
 		{ "areneighborcells", h3_areneighborcells },
 		{ "cellstoedge", h3_cellstoedge },
 		{ "isedge", h3_isedge },
