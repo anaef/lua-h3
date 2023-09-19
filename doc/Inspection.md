@@ -5,39 +5,40 @@ Lua H3 binds the following inspection functions.
 
 ## `h3.resolution (index)`
 
-Returns the resolution of the index.
+Returns the resolution of the specified index.
 
 
 ## `h3.basecellnumber (index)`
 
-Returns the base cell number of the index.
+Returns the base cell number of the specified index.
 
 
 ## `h3.stringtoh3 (str)`
 
-Converts the string representation to an index.
+Converts the specified string representation to an index.
 
 
 ## `h3.h3tostring (index)`
 
-Converts the index to a string representation.
+Converts the specified index to a string representation.
 
 
 ## `h3.iscell (index)`
 
-Returns whether the index is a cell.
+Returns whether the specified index is a cell.
 
 
 ## `h3.isresclassiii (index)`
 
-Returns whether the index is class III.
+Returns whether the specified index is
+[class III](https://h3geo.org/docs/core-library/coordsystems).
 
 
 ## `h3.ispentagon (index)`
 
-Returns whether the index is a pentagonal cell.
+Returns whether the specified index is a pentagonal cell.
 
 
-## `h3.geticosahedronfaces (index)`
+## `h3.icosahedronfaces (index)`
 
-Returns a list of icosahedron faces intersected by the index.
+Returns a list of icosahedron faces intersected by the specified index.

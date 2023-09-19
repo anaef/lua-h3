@@ -8,5 +8,11 @@ integers internally and in Lua.
 
 ## Latitude and Longitude
 
-Latitudes and longitudes are internally processed as double values expressed in radians. In Lua,
-they are numbers expressed in degrees.
+Latitude and longitude are internally processed as double values expressed in radians. In Lua,
+they are numbers expressed in degrees. The binding automatically converts between radians and
+degrees.
+
+
+## Resolution
+
+H3 supports resolutions `0` (coarsest) to `15` (finest). Resolutions are integers.

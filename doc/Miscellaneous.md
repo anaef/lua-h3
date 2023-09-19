@@ -13,8 +13,9 @@ in (square) meters or (square) kilometers, respectively.
 
 ## `h3.cellarea (cell [, unit])`
 
-Returns the area of a cell. The optional `unit` argument can take the values `"m"`, `"km"`,
-or `"rad"` to query the area in square meters, square kilometers, or square radians, respectively.
+Returns the area of the specified cell. The optional `unit` argument can take the values `"m"`,
+`"km"`, or `"rad"` to query the area in square meters, square kilometers, or square radians,
+respectively.
 
 
 ## `h3.edgelength (edge [, unit])`
@@ -41,5 +42,5 @@ Returns the list of pentagons at the specified resolution.
 ## `h3.greatcircledistance (lat1, lng1, lat2, lng2 [, unit])`
 
 Returns the great circle distance between two coordinates. The optional `unit` argument can take
-the values `"m"`,`"km"`, or `"rad"` to query the distance in meters, kilometers, or radians,
+the values `"m"`, `"km"`, or `"rad"` to query the distance in meters, kilometers, or radians,
 respectively.
