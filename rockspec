@@ -2,7 +2,6 @@ rockspec_format = "3.0"
 package = "lua-h3"
 version = "4.0.0-1"
 description = {
-
 	summary = "Lua bindings for H3",
 	detailed = [[
 		Lua H3 provides Lua bindings for the H3 library. H3 is a hexagonal hierarchical
