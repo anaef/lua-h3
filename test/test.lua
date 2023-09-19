@@ -120,23 +120,27 @@ for _, cell in ipairs(uncompactcells) do
 end
 
 -- region
-local polygon = {
+local ring = {
 	{ LAT, LNG },
-	{ LAT + 1, LNG },
+	{ LAT, LNG + 1},
 	{ LAT + 1, LNG + 1 },
-	{ LAT, LNG + 1 }
+	{ LAT + 1, LNG },
+	{ LAT, LNG }
 }
-local cells = h3.polygontocells({polygon}, 8)
+local cells = h3.polygontocells({ ring }, 8)
+assert(#cells > 0)
 for _, cell in ipairs(cells) do
 	assert(h3.iscell(cell))
 end
 local hole = {
 	{ LAT + 0.25, LNG + 0.25 }, 
-	{ LAT + 0.25, LNG + 0.75 }, 
+	{ LAT + 0.75, LNG + 0.25 }, 
 	{ LAT + 0.75, LNG + 0.75 }, 
-	{ LAT + 0.75, LNG + 0.25 }
+	{ LAT + 0.25, LNG + 0.75 },
+	{ LAT + 0.25, LNG + 0.25 } 
 }
-local partialCells = h3.polygontocells({polygon, hole}, 8)
+local partialCells = h3.polygontocells({ ring, hole }, 8)
+assert(#partialCells > 0)
 assert(#partialCells < #cells)
 for _, cell in ipairs(cells) do
 	assert(h3.iscell(cell))
@@ -144,14 +148,20 @@ end
 local polygons = h3.cellstopolygons(cells)
 assert(#polygons == 1)
 local polygon = polygons[1]
-assert(#polygon > 0)
-local loop = polygon[1]
-assert(#loop > 100)
-for _, latLng in ipairs(loop) do
+assert(#polygon == 1)
+local ring = polygon[1]
+assert(#ring > 100)
+for _, latLng in ipairs(ring) do
 	assert(#latLng == 2)
 	assert(math.abs(latLng[1] - LAT) < 1 + TOL)
 	assert(math.abs(latLng[2] - LNG) < 1 + TOL)
 end
+local polygons = h3.cellstopolygons(partialCells)
+assert(#polygons == 1)
+local polygon = polygons[1]
+assert(#polygon == 2)
+assert(#polygon[1] > 100)
+assert(#polygon[2] > 100)
 
 -- directed edge
 local cell = h3.latlngtocell(LAT, LNG, RES)
