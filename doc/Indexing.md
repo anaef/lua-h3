@@ -1,6 +1,6 @@
 # Indexing Functions
 
-Lua H3 binds the following indexing functions.
+Lua H3 binds the following [indexing functions](https://h3geo.org/docs/api/indexing).
 
 
 ## `h3.latlngtocell (lat, lng, res)`

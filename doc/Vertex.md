@@ -1,6 +1,6 @@
 # Vertex Functions
 
-Lua H3 binds the following vertex functions.
+Lua H3 binds the following [vertex functions](https://h3geo.org/docs/api/vertex).
 
 
 ## `h3.celltovertexes (origin [, num])`

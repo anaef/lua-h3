@@ -1,6 +1,6 @@
 # Traversal Functions
 
-Lua H3 binds the following traversal functions.
+Lua H3 binds the following [traversal functions](https://h3geo.org/docs/api/traversal).
 
 
 ## `h3.griddisk (origin, k [, mode])`

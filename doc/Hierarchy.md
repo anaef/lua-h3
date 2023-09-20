@@ -1,6 +1,6 @@
 # Hierarchy Functions
 
-Lua H3 binds the following hierarchy functions.
+Lua H3 binds the following [hierarchy functions](https://h3geo.org/docs/api/hierarchy).
 
 
 ## `h3.celltoparent (cell, parentres)`
@@ -21,6 +21,10 @@ Returns the center child cell of the specified cell at the specified finer resol
 ## `h3.compactcells (cells)`
 
 Returns a set of cells that best compacts the provided set of same-resolution cells.
+
+> [!IMPORTANT]
+> Please refer to the [H3 indexing documentation](https://h3geo.org/docs/highlights/indexing)
+> for an illustration of compacted cells.
 
 
 ## `h3.uncompactcells (cells, res)`

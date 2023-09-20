@@ -1,6 +1,6 @@
 # Directed Edge Functions
 
-Lua H3 binds the following directed edge functions.
+Lua H3 binds the following [directed edge functions](https://h3geo.org/docs/api/uniedge).
 
 
 ## `h3.areneighborcells (origin, dest)`
@@ -27,7 +27,7 @@ mode is `"destination"`, the function returns only the destination cell.
 
 ## `h3.origintoedges (cell)`
 
-Returns the list of the up to six directed egdes of the specified origin cell.
+Returns the list of the up to six directed edges of the specified origin cell.
 
 
 ## `h3.edgetoboundary (edge)`

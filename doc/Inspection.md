@@ -1,6 +1,6 @@
 # Inspection Functions
 
-Lua H3 binds the following inspection functions.
+Lua H3 binds the following [inspection functions](https://h3geo.org/docs/api/inspection).
 
 
 ## `h3.resolution (index)`
