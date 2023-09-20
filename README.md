@@ -13,10 +13,19 @@ hierarchical geospatial indexing system.
 You may need to install H3 first in order to build Lua H3. Please see the
 [H3 installation documentation](https://h3geo.org/docs/installation).
 
-To build a shared library, you can add `-DBUILD_SHARED_LIBS=1` to the cmake call.
+To build a shared library, you can add `-DBUILD_SHARED_LIBS=1` to the H3 cmake call.
 
 
-### Building with Make
+### Building and Installing with LuaRocks
+
+To build and install with LuaRocks, run:
+
+```
+luarocks install lua-h3
+```
+
+
+### Building, Testing and Installing with Make
 
 Lua H3 comes with a simple Makefile. Please adapt the Makefile to your environment, and then
 run:
