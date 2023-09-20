@@ -545,7 +545,7 @@ static void geoloop (lua_State *L, int index, int loopindex, GeoLoop *loop) {
 		luaL_error(L, "bad polygon");
 	}
 	len = lua_rawlen(L, -1);
-	if (len < 3) {
+	if (len < 4) {
 		luaL_error(L, "bad polygon");
 	}
 	loop->verts = malloc(len * sizeof(LatLng));
