@@ -4,7 +4,8 @@ This section describes the types used by H3 and Lua H3.
 
 > [!NOTE]
 > If you are new to H3, you may want to read the
-> [indexing introduction](https://h3geo.org/docs/highlights/indexing), and get familiar with
+> [aggregation](https://h3geo.org/docs/highlights/aggregation) and
+> [indexing](https://h3geo.org/docs/highlights/indexing) introductions, and get familiar with
 > some [H3 terminology](https://h3geo.org/docs/library/terminology).
 
 

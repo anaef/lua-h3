@@ -32,12 +32,12 @@ Returns the total number of cells at the specified resolution.
 
 ## `h3.res0cells ()`
 
-Returns the list of cells at resolution `0`.
+Returns a list of the cells at resolution `0`.
 
 
 ## `h3.pentagons (res)`
 
-Returns the list of pentagons at the specified resolution.
+Returns a list of the pentagons at the specified resolution.
 
 
 ## `h3.greatcircledistance (lat1, lng1, lat2, lng2 [, unit])`

@@ -27,10 +27,10 @@ mode is `"destination"`, the function returns only the destination cell.
 
 ## `h3.origintoedges (cell)`
 
-Returns the list of the up to six directed edges of the specified origin cell.
+Returns a list of the up to six directed edges of the specified origin cell.
 
 
 ## `h3.edgetoboundary (edge)`
 
-Returns the coordinates of the specified directed edge as a list of lists of latitutde and
+Returns the coordinates of the specified directed edge as a list of lists of latitude and
 longitude.

@@ -14,6 +14,6 @@ The documentation is split into the following sections:
 * [Miscellaneous Functions](Miscellaneous.md)
 
 > [!NOTE]
-> The present documentation focuses on the binding of H3 to Lua. You may also want to consult the
+> The present documentation focuses on the _Lua binding_ for H3. You may also want to consult the
 > official [H3 documentation](https://h3geo.org/docs/) for more detailed information on H3 and
 > its individual functions.

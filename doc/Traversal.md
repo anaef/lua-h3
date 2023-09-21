@@ -35,10 +35,11 @@ Returns the distance in cells between the specified origin and destination cells
 
 ## `h3.celltolocalij (origin, dest)`
 
-Returns local IJ coordinates for the specified destination cell relative to the specified origin
-cell.
+Returns [local IJ coordinates](https://h3geo.org/docs/core-library/coordsystems) for the
+specified destination cell relative to the specified origin cell.
 
 
 ## `h3.localijtocell (origin, i, j)`
 
-Returns the destination cell for the specified origin cell and local IJ coordinates.
+Returns the destination cell for the specified origin cell and
+[local IJ coordinates](https://h3geo.org/docs/core-library/coordsystems).
