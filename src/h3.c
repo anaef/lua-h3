@@ -110,7 +110,7 @@ static int geopolygon_gc (lua_State *L) {
 	int          i;
 	GeoPolygon  *polygon;
 
-	polygon = luaL_checkudata(L, 1, LUAH3_GEOPOLYGON);
+	polygon = luaL_checkudata(L, 1, H3_GEOPOLYGON);
 	free(polygon->geoloop.verts);
 	for (i = 0; i < polygon->numHoles; i++) {
 		free(polygon->holes[i].verts);
@@ -122,7 +122,7 @@ static int geopolygon_gc (lua_State *L) {
 static int linkedgeopolygon_gc (lua_State *L) {
 	LinkedGeoPolygon  *polygon;
 
-	polygon = luaL_checkudata(L, 1, LUAH3_LINKEDGEOPOLYGON);
+	polygon = luaL_checkudata(L, 1, H3_LINKEDGEOPOLYGON);
 	destroyLinkedMultiPolygon(polygon);
 	return 0;
 }
@@ -290,7 +290,7 @@ static int h3_griddisk (lua_State *L) {
 	mode = luaL_optstring(L, 3, "");
 	check(L, maxGridDiskSize(k, &num));
 	if (strchr(mode, 'd')) {
-		if (num <= LUAH3_STACK_MAX / 2) {
+		if (num <= H3_STACK_MAX / 2) {
 			out = alloca(num * sizeof(H3Index));
 			distances = alloca(num * sizeof(int));
 		} else {
@@ -312,7 +312,7 @@ static int h3_griddisk (lua_State *L) {
 		}
 		return 2;
 	} else {
-		if (num <= LUAH3_STACK_MAX) {
+		if (num <= H3_STACK_MAX) {
 			out = alloca(num * sizeof(H3Index));
 		} else {
 			out = lua_newuserdata(L, num * sizeof(H3Index));
@@ -345,7 +345,7 @@ static int h3_gridring (lua_State *L) {
 		numInner = 0;
 	}
 	num = numOuter - numInner;
-	if (num <= LUAH3_STACK_MAX) {
+	if (num <= H3_STACK_MAX) {
 		out = alloca(num * sizeof(H3Index));
 	} else {
 		out = lua_newuserdata(L, num * sizeof(H3Index));
@@ -366,7 +366,7 @@ static int h3_gridpathcells (lua_State *L) {
 	start = luaL_checkinteger(L, 1);
 	end = luaL_checkinteger(L, 2);
 	check(L, gridPathCellsSize(start, end, &num));
-	if (num <= LUAH3_STACK_MAX) {
+	if (num <= H3_STACK_MAX) {
 		out = alloca(num * sizeof(H3Index));
 	} else {
 		out = lua_newuserdata(L, num * sizeof(H3Index));
@@ -439,7 +439,7 @@ static int h3_celltochildren (lua_State *L) {
 	cell = luaL_checkinteger(L, 1);
 	childres = luaL_checkinteger(L, 2);
 	check(L, cellToChildrenSize(cell, childres, &num));
-	if (num <= LUAH3_STACK_MAX) {
+	if (num <= H3_STACK_MAX) {
 		children = alloca(num * sizeof(H3Index));
 	} else {
 		children = lua_newuserdata(L, num * sizeof(H3Index));
@@ -470,7 +470,7 @@ static int h3_compactcells (lua_State *L) {
 
 	luaL_checktype(L, 1, LUA_TTABLE);
 	len = lua_rawlen(L, 1);
-	if (len <= LUAH3_STACK_MAX / 2) {
+	if (len <= H3_STACK_MAX / 2) {
 		cellSet = alloca(len * sizeof(H3Index));
 		compactedSet = alloca(len * sizeof(H3Index));
 	} else {
@@ -506,7 +506,7 @@ static int h3_uncompactcells (lua_State *L) {
 	luaL_checktype(L, 1, LUA_TTABLE);
 	res = luaL_checkinteger(L, 2);
 	len = lua_rawlen(L, 1);
-	if (len <= LUAH3_STACK_MAX / 2) {
+	if (len <= H3_STACK_MAX / 2) {
 		compactedSet = alloca(len * sizeof(H3Index));
 	} else {
 		compactedSet = lua_newuserdata(L, len * sizeof(H3Index));
@@ -519,7 +519,7 @@ static int h3_uncompactcells (lua_State *L) {
 		lua_pop(L, 1);
 	}
 	check(L, uncompactCellsSize(compactedSet, len, res, &num));
-	if (num <= LUAH3_STACK_MAX / 2) {
+	if (num <= H3_STACK_MAX / 2) {
 		cellSet = alloca(num * sizeof(H3Index));
 	} else {
 		cellSet = lua_newuserdata(L, num * sizeof(H3Index));
@@ -580,7 +580,7 @@ static int h3_polygontocells (lua_State *L) {
 	res = luaL_checkinteger(L, 2);
 	polygon = lua_newuserdata(L, sizeof(GeoPolygon));
 	memset(polygon, 0, sizeof(GeoPolygon));
-	luaL_getmetatable(L, LUAH3_GEOPOLYGON);
+	luaL_getmetatable(L, H3_GEOPOLYGON);
 	lua_setmetatable(L, -2);
 	geoloop(L, 1, 1, &polygon->geoloop);
 	if (len > 1) {
@@ -595,7 +595,7 @@ static int h3_polygontocells (lua_State *L) {
 		}
 	}
 	check(L, maxPolygonToCellsSize(polygon, res, 0, &num));
-	if (num <= LUAH3_STACK_MAX) {
+	if (num <= H3_STACK_MAX) {
 		out = alloca(num * sizeof(H3Index));
 	} else {
 		out = lua_newuserdata(L, num * sizeof(H3Index));
@@ -628,7 +628,7 @@ static int h3_cellstopolygons (lua_State *L) {
 
 	luaL_checktype(L, 1, LUA_TTABLE);
 	len = lua_rawlen(L, 1);
-	if (len <= LUAH3_STACK_MAX) {
+	if (len <= H3_STACK_MAX) {
 		h3Set = alloca(len * sizeof(H3Index));
 	} else {
 		h3Set = lua_newuserdata(L, len * sizeof(H3Index));
@@ -642,7 +642,7 @@ static int h3_cellstopolygons (lua_State *L) {
 	}
 	polygon = lua_newuserdata(L, sizeof(LinkedGeoPolygon));
 	memset(polygon, 0, sizeof(LinkedGeoPolygon));
-	luaL_getmetatable(L, LUAH3_LINKEDGEOPOLYGON);
+	luaL_getmetatable(L, H3_LINKEDGEOPOLYGON);
 	lua_setmetatable(L, -2);
 	check(L, cellsToLinkedMultiPolygon(h3Set, len, polygon));
 	lua_newtable(L);
@@ -939,7 +939,7 @@ static int h3_res0cells (lua_State *L) {
 	H3Index  *out;
 
 	num = res0CellCount();  /* 122 */
-	if (num <= LUAH3_STACK_MAX) {
+	if (num <= H3_STACK_MAX) {
 		out = alloca(num * sizeof(H3Index));
 	} else {
 		out = lua_newuserdata(L, num * sizeof(H3Index));
@@ -960,7 +960,7 @@ static int h3_pentagons (lua_State *L) {
 
 	res = luaL_checkinteger(L, 1);
 	num = pentagonCount();  /* 12 */
-	if (num <= LUAH3_STACK_MAX) {
+	if (num <= H3_STACK_MAX) {
 		out = alloca(num * sizeof(H3Index));
 	} else {
 		out = lua_newuserdata(L, num * sizeof(H3Index));
@@ -1077,11 +1077,11 @@ int luaopen_h3 (lua_State *L) {
 	luaL_newlib(L, FUNCTIONS);
 
 	/* metatables */
-	luaL_newmetatable(L, LUAH3_GEOPOLYGON);
+	luaL_newmetatable(L, H3_GEOPOLYGON);
 	lua_pushcfunction(L, geopolygon_gc);
 	lua_setfield(L, -2, "__gc");
 	lua_pop(L, 1);
-	luaL_newmetatable(L, LUAH3_LINKEDGEOPOLYGON);
+	luaL_newmetatable(L, H3_LINKEDGEOPOLYGON);
 	lua_pushcfunction(L, linkedgeopolygon_gc);
 	lua_setfield(L, -2, "__gc");
 	lua_pop(L, 1);

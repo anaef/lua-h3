@@ -5,19 +5,19 @@
  */
 
 
-#ifndef _LUAH3_INCLUDED
-#define _LUAH3_INCLUDED
+#ifndef _H3_INCLUDED
+#define _H3_INCLUDED
 
 
 #include <lua.h>
 
 
-#define LUAH3_GEOPOLYGON        "h3.geopolygon"        /* GeoPolygon metatable */
-#define LUAH3_LINKEDGEOPOLYGON  "h3.linkedgeopolygon"  /* LinkedGeoPolygon metatable */
-#define LUAH3_STACK_MAX         128                    /* maximum indexes on stack */
+#define H3_GEOPOLYGON        "h3.geopolygon"        /* GeoPolygon metatable */
+#define H3_LINKEDGEOPOLYGON  "h3.linkedgeopolygon"  /* LinkedGeoPolygon metatable */
+#define H3_STACK_MAX         128                    /* maximum indexes on stack */
 
 
 int luaopen_h3(lua_State *L);
 
 
-#endif  /* _LUAH3_INCLUDED */
+#endif  /* _H3_INCLUDED */
