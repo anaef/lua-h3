@@ -12,7 +12,7 @@ local h3 = require("h3")
 
 local lat, lng = 47.37, 8.55
 print(string.format("Coordinates: %.4f %.4f", lat, lng))
-local cell = h3.latlngtocell(47.37, 8.55, 8)
+local cell = h3.latlngtocell(lat, lng, 8)
 print(string.format("Cell at resolution 8: %x", cell))
 local lat, lng = h3.celltolatlng(cell)
 print(string.format("Centroid coordinates: %.4f %.4f", lat, lng))
