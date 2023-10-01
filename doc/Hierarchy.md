@@ -18,6 +18,18 @@ Returns a list of child cells of the specified cell at the specified finer resol
 Returns the center child cell of the specified cell at the specified finer resolution.
 
 
+## `h3.celltochildpos (cell, parentres)`
+
+Returns the position of the specified cell within the ordered list of child cells of its parent
+cell at the specified resolution.
+
+
+## `h3.childpostocell (childpos, parent, childres)`
+
+Returns a child cell based on its specified position within the ordered list of child cells of
+the specified parent cell at the specified resolution.
+
+
 ## `h3.compactcells (cells)`
 
 Returns a set of cells that best compacts the provided set of same-resolution cells.

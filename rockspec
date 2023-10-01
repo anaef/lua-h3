@@ -1,6 +1,6 @@
 rockspec_format = "3.0"
 package = "lua-h3"
-version = "4.0.0-1"
+version = "4.1.0-1"
 description = {
 	summary = "Lua bindings for H3",
 	detailed = [[
@@ -21,7 +21,7 @@ external_dependencies = {
 }
 source = {
 	url = "git+https://github.com/anaef/lua-h3.git",
-	tag = "v4.0.0",
+	tag = "v4.1.0",
 }
 build = {
 	type = "builtin",

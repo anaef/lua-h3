@@ -40,6 +40,8 @@ static int h3_localijtocell(lua_State *L);
 static int h3_celltoparent(lua_State *L);
 static int h3_celltochildren(lua_State *L);
 static int h3_celltocenterchild(lua_State *L);
+static int h3_celltochildpos(lua_State *L);
+static int h3_childpostocell(lua_State *L);
 static int h3_compactcells(lua_State *L);
 static int h3_uncompactcells(lua_State *L);
 
@@ -460,6 +462,31 @@ static int h3_celltocenterchild (lua_State *L) {
 	cell = luaL_checkinteger(L, 1);
 	childres = luaL_checkinteger(L, 2);
 	check(L, cellToCenterChild(cell, childres, &child));
+	lua_pushinteger(L, child);
+	return 1;
+}
+
+static int h3_celltochildpos (lua_State *L) {
+	int      parentres;
+	int64_t  out;
+	H3Index  child;
+
+	child = luaL_checkinteger(L, 1);
+	parentres = luaL_checkinteger(L, 2);
+	check(L, cellToChildPos(child, parentres, &out));
+	lua_pushinteger(L, out);
+	return 1;
+}
+
+static int h3_childpostocell (lua_State *L) {
+	int       childres;
+	int64_t   childpos;
+	H3Index   parent, child;
+
+	childpos = luaL_checkinteger(L, 1);
+	parent = luaL_checkinteger(L, 2);
+	childres = luaL_checkinteger(L, 3);
+	check(L, childPosToCell(childpos, parent, childres, &child));
 	lua_pushinteger(L, child);
 	return 1;
 }
@@ -1012,63 +1039,65 @@ static int h3_greatcircledistance (lua_State *L)  {
 int luaopen_h3 (lua_State *L) {
 	static const luaL_Reg FUNCTIONS[] = {
 		/* version */
-		{ "version", h3_version },
+		{"version", h3_version},
 
 		/* indexing */
-		{ "latlngtocell", h3_latlngtocell },
-		{ "celltolatlng", h3_celltolatlng },
-		{ "celltoboundary", h3_celltoboundary },
+		{"latlngtocell", h3_latlngtocell},
+		{"celltolatlng", h3_celltolatlng},
+		{"celltoboundary", h3_celltoboundary},
 
 		/* inspection */
-		{ "resolution", h3_resolution },
-		{ "basecellnumber", h3_basecellnumber },
-		{ "stringtoh3", h3_stringtoh3 },
-		{ "h3tostring", h3_h3tostring },
-		{ "iscell", h3_iscell },
-		{ "isresclassiii", h3_isresclassiii },
-		{ "ispentagon", h3_ispentagon },
-		{ "icosahedronfaces", h3_icosahedronfaces },
+		{"resolution", h3_resolution},
+		{"basecellnumber", h3_basecellnumber},
+		{"stringtoh3", h3_stringtoh3},
+		{"h3tostring", h3_h3tostring},
+		{"iscell", h3_iscell},
+		{"isresclassiii", h3_isresclassiii},
+		{"ispentagon", h3_ispentagon},
+		{"icosahedronfaces", h3_icosahedronfaces},
 
 		/* traversal */
-		{ "griddisk", h3_griddisk },
-		{ "gridring", h3_gridring },
-		{ "gridpathcells", h3_gridpathcells },
-		{ "griddistance", h3_griddistance },
-		{ "celltolocalij", h3_celltolocalij },
-		{ "localijtocell", h3_localijtocell },
+		{"griddisk", h3_griddisk},
+		{"gridring", h3_gridring},
+		{"gridpathcells", h3_gridpathcells},
+		{"griddistance", h3_griddistance},
+		{"celltolocalij", h3_celltolocalij},
+		{"localijtocell", h3_localijtocell},
 
 		/* hierarchy */
-		{ "celltoparent", h3_celltoparent },
-		{ "celltochildren", h3_celltochildren },
-		{ "celltocenterchild", h3_celltocenterchild },
-		{ "compactcells", h3_compactcells },
-		{ "uncompactcells", h3_uncompactcells },
+		{"celltoparent", h3_celltoparent},
+		{"celltochildren", h3_celltochildren},
+		{"celltocenterchild", h3_celltocenterchild},
+		{"celltochildpos", h3_celltochildpos},
+		{"childpostocell", h3_childpostocell},
+		{"compactcells", h3_compactcells},
+		{"uncompactcells", h3_uncompactcells},
 
 		/* region */
-		{ "polygontocells", h3_polygontocells },
-		{ "cellstopolygons", h3_cellstopolygons },
+		{"polygontocells", h3_polygontocells},
+		{"cellstopolygons", h3_cellstopolygons},
 
 		/* directed edge */
-		{ "areneighborcells", h3_areneighborcells },
-		{ "cellstoedge", h3_cellstoedge },
-		{ "isedge", h3_isedge },
-		{ "edgetocells", h3_edgetocells },
-		{ "origintoedges", h3_origintoedges },
-		{ "edgetoboundary", h3_edgetoboundary },
+		{"areneighborcells", h3_areneighborcells},
+		{"cellstoedge", h3_cellstoedge},
+		{"isedge", h3_isedge},
+		{"edgetocells", h3_edgetocells},
+		{"origintoedges", h3_origintoedges},
+		{"edgetoboundary", h3_edgetoboundary},
 
 		/* vertex */
-		{ "celltovertexes", h3_celltovertexes },
-		{ "vertextolatlng", h3_vertextolatlng },
-		{ "isvertex", h3_isvertex },
+		{"celltovertexes", h3_celltovertexes},
+		{"vertextolatlng", h3_vertextolatlng},
+		{"isvertex", h3_isvertex},
 
 		/* miscellaneous */
-		{ "hexagonavg", h3_hexagonavg },
-		{ "cellarea", h3_cellarea },
-		{ "edgelength", h3_edgelength },
-		{ "numcells", h3_numcells },
-		{ "res0cells", h3_res0cells },
-		{ "pentagons", h3_pentagons },
-		{ "greatcircledistance", h3_greatcircledistance },
+		{"hexagonavg", h3_hexagonavg},
+		{"cellarea", h3_cellarea},
+		{"edgelength", h3_edgelength},
+		{"numcells", h3_numcells},
+		{"res0cells", h3_res0cells},
+		{"pentagons", h3_pentagons},
+		{"greatcircledistance", h3_greatcircledistance},
 		
 		{ NULL, NULL }
 	};
