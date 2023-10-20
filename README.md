@@ -43,7 +43,9 @@ Child cells at resolution 8: 881f8ed951fffff 881f8ed953fffff 881f8ed955fffff 881
 You may need to build and install H3 in order to build Lua H3. Please see the
 [H3 installation documentation](https://h3geo.org/docs/installation).
 
-To build a shared library, you can add `-DBUILD_SHARED_LIBS=1` to the H3 cmake call.
+To build a shared library, you can add `-DBUILD_SHARED_LIBS=1` to the H3 cmake call. Alternatively,
+you can add `-DCMAKE_POSITION_INDEPENDENT_CODE=1` to the H3 cmake call to ensure the static H3
+library can be linked into a dynamically shared object.
 
 
 ### Building and Installing with LuaRocks
